@@ -1,24 +1,47 @@
 import Player from "@vimeo/player";
-import { throttle } from "lodash";
+import throttle from "lodash.throttle";
+// import Player from "@vimeo/player";
+// import throttle from "lodash.throttle";
 
-const currentTime = "videoplayer - current - time";
+const iframe = document.querySelector("#vimeo-player");
 
-const iframe = document.querySelector("iframe");
-const iframePlayer = new Vimeo.Player(iframe);
+// const iframe = document.querySelector("#vimeo-plater");
 
-const onPlay = function (data) {
-  // data is an object containing properties specific to that event
-  const dataStringify = JSON.stringify(data);
-  localStorage.setItem(currentTime, dataStringify);
-};
+const player = new Player(iframe);
 
-player.on(timeupdate, _throttle(onPlay, 1000));
+const CURRENT_TIME = "videoplayer-current-time";
 
-const player = new Player("handstick", {
-  id: 19231868,
-  width: 640,
-});
+// const player = new Player(iframe);
 
-player.on("play", function () {
-  console.log("played the video!");
-});
+// const CURRENT_TIME = "videoplayer-current-time";
+player.on("timeupdate", throttle(getTime, 1000));
+
+// player.on("timeupdate", throttle(timePlay, 1000));
+
+function getTime(data) {
+  const dataStringify = JSON.stringify(data.seconds);
+  localStorage.setItem(CURRENT_TIME, dataStringify);
+}
+
+// function timePlay(data) {
+//   localStorage.setItem(CURRENT_TIME, JSON.stringify(data.seconds));
+// }
+
+// const previusTime = JSON.parce(localStorage.getItem(CURRENT_TIME));
+
+const previusTime = JSON.parse(localStorage.getItem(CURRENT_TIME));
+// const previusTime = JSON.parse(localStorage.getItem(CURRENT_TIME));
+
+player.setCurrentTime(previusTime || 0);
+
+// player.setCurrentTime(previusTime || 0);
+
+// function continuePlay() {}
+// const player = new Player("handstick", {
+//   id: 19231868,
+//   width: 640,
+// });
+
+// player.on("play", function () {
+//   console.log("played the video!");
+// });
