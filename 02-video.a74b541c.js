@@ -508,35 +508,16 @@ var _player = require("@vimeo/player");
 var _playerDefault = parcelHelpers.interopDefault(_player);
 var _lodashThrottle = require("lodash.throttle");
 var _lodashThrottleDefault = parcelHelpers.interopDefault(_lodashThrottle);
-// import Player from "@vimeo/player";
-// import throttle from "lodash.throttle";
 const iframe = document.querySelector("#vimeo-player");
-// const iframe = document.querySelector("#vimeo-plater");
 const player = new (0, _playerDefault.default)(iframe);
-const CURRENT_TIME = "videoplayer-current-time";
-// const player = new Player(iframe);
-// const CURRENT_TIME = "videoplayer-current-time";
-player.on("timeupdate", (0, _lodashThrottleDefault.default)(getTime, 1000));
-// player.on("timeupdate", throttle(timePlay, 1000));
-function getTime(data) {
+const CURRENT_TARGET_TIME = "videoplayer-current-time";
+const previusTime = JSON.parse(localStorage.getItem(CURRENT_TARGET_TIME));
+function targetTime(data) {
     const dataStringify = JSON.stringify(data.seconds);
-    localStorage.setItem(CURRENT_TIME, dataStringify);
+    localStorage.setItem(CURRENT_TARGET_TIME, dataStringify);
 }
-// function timePlay(data) {
-//   localStorage.setItem(CURRENT_TIME, JSON.stringify(data.seconds));
-// }
-// const previusTime = JSON.parce(localStorage.getItem(CURRENT_TIME));
-const previusTime = JSON.parse(localStorage.getItem(CURRENT_TIME));
-// const previusTime = JSON.parse(localStorage.getItem(CURRENT_TIME));
-player.setCurrentTime(previusTime || 0); // player.setCurrentTime(previusTime || 0);
- // function continuePlay() {}
- // const player = new Player("handstick", {
- //   id: 19231868,
- //   width: 640,
- // });
- // player.on("play", function () {
- //   console.log("played the video!");
- // });
+player.on("timeupdate", (0, _lodashThrottleDefault.default)(targetTime, 1000));
+player.setCurrentTime(previusTime || 0);
 
 },{"@vimeo/player":"kmmUG","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","lodash.throttle":"bGJVT"}],"kmmUG":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
