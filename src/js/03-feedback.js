@@ -8,14 +8,11 @@ function addToLocalStorege(e) {
   localStorage.setItem(keyData, JSON.stringify(localStorageData));
 }
 formE.addEventListener("submit", logData);
-// const finalData = localStorage.getItem();
 function logData(e) {
   e.preventDefault();
   const mail = e.target.email.value;
   const message = e.target.message.value;
-  console.log({
-    localStorageData,
-  });
+  console.log(localStorageData);
   formE.reset();
   localStorage.removeItem(keyData);
 }
@@ -26,12 +23,6 @@ try {
     formE.elements[key].value = parcData[key] || "";
     formE.elements[key].value = parcData[key] || "";
   }
-
-  // if (writeData) {
-  //   formE.elements.email.value = parcData.email || "";
-  //   formE.elements.message.value = parcData.message || "";
-  //   const parcData = JSON.parse(writeData);
-  // }
 } catch (errorAlarm) {
   console.log(writeData);
   console.log(errorAlarm.name);
