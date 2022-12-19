@@ -517,7 +517,7 @@ function addToLocalStorege(e) {
 formE.addEventListener("submit", logData);
 function logData(e) {
     e.preventDefault();
-    const mail = e.target.elements.input;
+    const mail = e.target.email.value;
     const message = e.target.message.value;
     console.log({
         mail,
@@ -528,17 +528,19 @@ function logData(e) {
 }
 try {
     const writeData = localStorage.getItem(keyData);
-    for(const key in writeData)if (formE.elements[key].value = parcData[key] || "") {
-        formE.elements.message.value = parcData.message || "";
-        const parcData = JSON.parse(writeData);
-    // const element = object[key];
+    const parcData = JSON.parse(writeData);
+    for(const key in writeData){
+        formE.elements[key].value = parcData[key] || "";
+        formE.elements[key].value = parcData[key] || "";
+        console.log(writeData);
     }
-    if (writeData) {
-        formE.elements.email.value = parcData.email || "";
-        formE.elements.message.value = parcData.message || "";
-        const parcData = JSON.parse(writeData);
-    }
+// if (writeData) {
+//   formE.elements.email.value = parcData.email || "";
+//   formE.elements.message.value = parcData.message || "";
+//   const parcData = JSON.parse(writeData);
+// }
 } catch (errorAlarm) {
+    console.log(writeData);
     console.log(errorAlarm.name);
     console.log(errorAlarm.message);
 }
