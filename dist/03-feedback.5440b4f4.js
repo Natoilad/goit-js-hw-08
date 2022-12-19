@@ -529,7 +529,7 @@ function logData(e) {
 try {
     const writeData = localStorage.getItem(keyData);
     const parcData = JSON.parse(writeData);
-    for(const key in writeData){
+    for(const key in parcData){
         formE.elements[key].value = parcData[key] || "";
         formE.elements[key].value = parcData[key] || "";
         console.log(writeData);
