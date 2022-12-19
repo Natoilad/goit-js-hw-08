@@ -8,14 +8,13 @@ function addToLocalStorege(e) {
   localStorage.setItem(keyData, JSON.stringify(localStorageData));
 }
 formE.addEventListener("submit", logData);
-
+// const finalData = localStorage.getItem();
 function logData(e) {
   e.preventDefault();
   const mail = e.target.email.value;
   const message = e.target.message.value;
   console.log({
-    mail,
-    message,
+    localStorageData,
   });
   formE.reset();
   localStorage.removeItem(keyData);
@@ -26,7 +25,6 @@ try {
   for (const key in parcData) {
     formE.elements[key].value = parcData[key] || "";
     formE.elements[key].value = parcData[key] || "";
-    console.log(writeData);
   }
 
   // if (writeData) {
