@@ -9,10 +9,10 @@ const CURRENT_TARGET_TIME = "videoplayer-current-time";
 
 try {
   const previusTime = JSON.parse(localStorage.getItem(CURRENT_TARGET_TIME));
+  player.setCurrentTime(previusTime || 0);
 } catch (error) {
   console.log("Error get time");
 }
-const previusTime = JSON.parse(localStorage.getItem(CURRENT_TARGET_TIME));
 
 function targetTime(data) {
   // const dataStringify = JSON.stringify(data.seconds);
@@ -20,5 +20,3 @@ function targetTime(data) {
 }
 
 player.on("timeupdate", throttle(targetTime, 1000));
-
-player.setCurrentTime(previusTime || 0);
